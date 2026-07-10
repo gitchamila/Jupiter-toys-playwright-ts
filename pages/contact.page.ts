@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { NavigationComponent } from '../components/navigation.component'
-import { generateContactData, mandatoryFieldErrors, type ContactData } from '../utils/contact.data';
+import { generateContactData, mandatoryFieldErrors, type ContactData } from '../test-data/contact.data';
 
 
 export class ContactPage {

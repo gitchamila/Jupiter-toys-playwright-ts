@@ -10,7 +10,7 @@ export class NavigationComponent {
     }
 
     async goToShop(): Promise<void> {
-        await this.page.getByRole('link', { name: 'Shop' }).click();
+        await this.page.getByRole('link', { name: 'Shop' }).first().click();
     }
 
     async goToCart(): Promise<void> {

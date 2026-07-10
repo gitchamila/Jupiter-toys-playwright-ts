@@ -1,5 +1,6 @@
-import { test, expect } from '../../fixtures/base.fixture';
-import { ContactPage } from '../../pages/contact.page'
+import { test, expect } from '../fixtures/base.fixture';
+import { ContactPage } from '../pages/contact.page'
+
 
 test.describe('Contact Form Tests', () => {
     test.beforeEach(async ({ basePage }) => {
