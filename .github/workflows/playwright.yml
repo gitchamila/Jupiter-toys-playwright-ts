@@ -40,10 +40,14 @@ jobs:
       - name: Run Test Case 2 five times
         run: npm run test:tc2
 
-      - name: Upload Playwright HTML report
+      - name: Generate merged report
+        if: always()
+        run: npm run report:enhanced
+
+      - name: Upload Enhanced Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-html-report
-          path: reports/
+          name: enhanced-playwright-report
+          path: reports/enhanced-report.html
           retention-days: 30

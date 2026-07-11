@@ -13,9 +13,14 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 2 : undefined,
 
+  // reporter: [
+  //   ['list'],
+  //   ['html', { outputFolder: 'reports', open: 'always' }],
+  // ],
+
   reporter: [
     ['list'],
-    ['html', { outputFolder: 'reports', open: 'always' }],
+    ['html', { outputFolder: 'reports/playwright-html-report', open: 'never' }],
   ],
 
   use: {
