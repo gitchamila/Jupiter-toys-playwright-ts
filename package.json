@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "test:tc2": "playwright test tests/contact.spec.ts --grep \"Test case 2 - Contact Form Submission\" --repeat-each=5",
+    "report": "playwright show-report reports/playwright-html-report"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

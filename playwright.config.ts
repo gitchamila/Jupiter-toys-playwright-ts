@@ -7,11 +7,11 @@ export default defineConfig({
     timeout: 10_000,
   },
 
-  repeatEach: 5,//
+  //repeatEach: 5, 
 
   fullyParallel: true,
-  // retries: process.env.CI ? 2 : 0,
-  // workers: process.env.CI ? 2 : undefined,
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 2 : undefined,
 
   reporter: [
     ['list'],
@@ -21,7 +21,7 @@ export default defineConfig({
   use: {
 
     baseURL: 'https://jupiter.cloud.planittesting.com/#/',
-    headless: false,
+    headless: process.env.CI ? true : false,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     trace: 'retain-on-failure',
