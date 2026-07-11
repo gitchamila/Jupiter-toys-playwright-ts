@@ -7,20 +7,13 @@ export default defineConfig({
     timeout: 10_000,
   },
 
-  //repeatEach: 5, 
-
   fullyParallel: true,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 2 : undefined,
 
-  // reporter: [
-  //   ['list'],
-  //   ['html', { outputFolder: 'reports', open: 'always' }],
-  // ],
-
   reporter: [
     ['list'],
-    ['html', { outputFolder: 'reports/playwright-html-report', open: 'never' }],
+    ['html', { outputFolder: 'reports', open: 'never' }],
   ],
 
   use: {
