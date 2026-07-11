@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { NavigationComponent } from '../components/navigation.component'
 import { generateContactData, mandatoryFieldErrors, type ContactData } from '../test-data/contact.data';
+import { setMetric, getMetric } from '../utils/metrics-context';
 
 
 export class ContactPage {
@@ -47,9 +48,17 @@ export class ContactPage {
         await this.forenameInput.fill(data.forename);
         await this.emailInput.fill(data.email);
         await this.messageInput.fill(data.message);
+        setMetric('forename', data.forename);
     }
 
-    async verifySuccessfulSubmission (data = generateContactData()) : Promise<void> {
+    async verifySuccessfulSubmission(): Promise<void> {
+        const savedForename = getMetric('forename');
+        const sendingFeedbackPopup = this.page.getByRole('heading', { name: 'Sending Feedback', });
+        const successMessage = this.page.locator('.alert-success').filter({ hasText: `Thanks ${savedForename}, we appreciate your feedback.`, });
+        await expect(sendingFeedbackPopup).toBeVisible();
+        await expect(sendingFeedbackPopup).toBeHidden({ timeout: 30000 });
+        await expect(successMessage).toBeVisible({ timeout: 10000 });
+        await expect(successMessage).toContainText(`Thanks ${savedForename}, we appreciate your feedback.`);
 
     }
 }
