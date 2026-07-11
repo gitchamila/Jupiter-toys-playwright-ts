@@ -1,0 +1,200 @@
+:root {
+    --qa-bg: #f4f7fb;
+    --qa-surface: #ffffff;
+    --qa-surface-alt: #eef4ff;
+    --qa-text: #162033;
+    --qa-muted: #667085;
+    --qa-border: #dbe3f0;
+    --qa-accent: #2563eb;
+    --qa-accent-2: #7c3aed;
+    --qa-success: #16a34a;
+    --qa-success-bg: #dcfce7;
+    --qa-failed: #dc2626;
+    --qa-failed-bg: #fee2e2;
+    --qa-skipped: #d97706;
+    --qa-skipped-bg: #fef3c7;
+    --qa-shadow: 0 12px 32px rgba(16, 24, 40, 0.08);
+    --qa-radius: 12px;
+    --qa-font: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+}
+
+html,
+body {
+    background: linear-gradient(180deg, #eef4ff 0%, #f4f7fb 100%);
+    color: var(--qa-text);
+    font-family: var(--qa-font);
+}
+
+body {
+    max-width: 1320px;
+    margin: 0 auto;
+}
+
+.qa-summary-header {
+    margin: 16px 16px 10px;
+    padding: 24px;
+    border-radius: var(--qa-radius);
+    background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 45%, #7c3aed 100%);
+    color: #fff;
+    box-shadow: var(--qa-shadow);
+}
+
+.qa-brand {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.qa-brand img {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 14px;
+    padding: 10px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.qa-summary-header h1 {
+    margin: 0;
+    font-size: 30px;
+    line-height: 1.2;
+    letter-spacing: 0;
+}
+
+.qa-summary-header p {
+    margin: 8px 0 0;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 15px;
+}
+
+.qa-summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 14px;
+    margin: 0 16px 18px;
+}
+
+.qa-summary-cards div {
+    background: var(--qa-surface);
+    border: 1px solid var(--qa-border);
+    border-radius: var(--qa-radius);
+    padding: 16px 18px;
+    box-shadow: var(--qa-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.qa-summary-cards div::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--qa-accent), var(--qa-accent-2));
+}
+
+.qa-summary-cards strong {
+    display: block;
+    margin-top: 6px;
+    font-size: 24px;
+    color: var(--qa-text);
+}
+
+.qa-summary-cards div {
+    color: var(--qa-muted);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+thead th {
+    background: #eef4ff;
+    color: var(--qa-text);
+    font-weight: 700;
+    border-bottom: 1px solid var(--qa-border);
+}
+
+tbody td {
+    vertical-align: top;
+}
+
+a {
+    color: var(--qa-accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.badge,
+[class*="status"] {
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-weight: 700;
+}
+
+.badge.passed,
+.status-passed {
+    color: var(--qa-success);
+    background: var(--qa-success-bg);
+}
+
+.badge.failed,
+.status-failed {
+    color: var(--qa-failed);
+    background: var(--qa-failed-bg);
+}
+
+.badge.skipped,
+.status-skipped {
+    color: var(--qa-skipped);
+    background: var(--qa-skipped-bg);
+}
+
+.qa-section-title {
+    margin: 18px 16px 10px;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--qa-text);
+}
+
+.qa-table-wrap {
+    margin: 0 16px 18px;
+    background: var(--qa-surface);
+    border: 1px solid var(--qa-border);
+    border-radius: var(--qa-radius);
+    box-shadow: var(--qa-shadow);
+    overflow: hidden;
+}
+
+.qa-step-list {
+    margin: 8px 0 0;
+    padding-left: 18px;
+    color: var(--qa-text);
+}
+
+.qa-step-list li {
+    margin: 6px 0;
+}
+
+@media (max-width: 700px) {
+    .qa-brand {
+        align-items: flex-start;
+    }
+
+    .qa-brand img {
+        width: 56px;
+        height: 56px;
+    }
+
+    .qa-summary-header h1 {
+        font-size: 22px;
+    }
+}
