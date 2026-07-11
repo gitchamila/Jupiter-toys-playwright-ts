@@ -1,77 +1,167 @@
 # Jupiter Toys Playwright TypeScript Automation Framework
 
-This project contains a Playwright + TypeScript automation framework for testing the Jupiter Toys application.
+This repository contains a UI automation framework for the Jupiter Toys technical assessment built with Playwright and TypeScript.
 
-## Current project structure
+## Overview
 
-- tests/
-  - contact.spec.ts: contact form validation and submission scenarios
-  - shop.spec.ts: shop page product visibility scenarios
-- pages/
-  - base.page.ts: shared base page methods
-  - contact.page.ts: contact page actions and assertions
-  - shop.page.ts: shop page actions and assertions
-  - cart.page.ts: cart-related page object (available for future coverage)
-- components/
-  - navigation.component.ts: shared navigation actions
-- fixtures/
-  - base.fixture.ts: custom Playwright fixture that opens the home page and validates the app is loaded
-- test-data/
-  - contact.data.ts: reusable contact form data and validation messages
-- playwright.config.ts: Playwright configuration with base URL, browser setup, reporters, and screenshots/video/tracing settings
+The framework is structured for maintainability and reuse. It follows common QA automation patterns such as:
 
-## Current behavior
+- Page Object Model
+- Reusable fixtures
+- Separated test data
+- Shared utility functions
+- Browser-specific Playwright configuration
+- CI/CD-ready execution
+- HTML reporting
+- Failure screenshots, videos, and traces
 
-- The custom fixture in fixtures/base.fixture.ts loads the home page before each test.
-- It verifies that the application URL contains #/ and that the page title is Jupiter Toys.
-- The contact page object interacts with the contact form, validates mandatory field errors, and prepares form data.
-- The shop page object navigates to the shop view and verifies product cards are visible.
+## Application Under Test
 
-## Prerequisites
+Jupiter Toys
 
+`http://jupiter.cloud.planittesting.com`
+
+## Automated Coverage
+
+The current test suite covers:
+
+1. Contact page mandatory field validation
+2. Contact page successful form submission
+3. Shop page product visibility
+4. Cart validation for:
+   - 2 Stuffed Frog
+   - 5 Fluffy Bunny
+   - 3 Valentine Bear
+5. Cart price, subtotal, and total calculations
+
+## Tech Stack
+
+- Playwright
+- TypeScript
 - Node.js
 - npm
 
+## Project Structure
+
+```text
+tests/          Test specifications
+pages/          Page object classes
+components/     Shared UI components
+fixtures/       Custom Playwright fixtures
+test-data/      Static test data and messages
+utils/          Helper functions and calculation logic
+.github/        GitHub Actions workflow files
+reports/        Generated Playwright HTML report
+allure-results/ Allure execution output
+```
+
+## Key Files
+
+- `tests/contact.spec.ts` - contact form validation and submission tests
+- `tests/shop.spec.ts` - shop and cart tests
+- `fixtures/base.fixture.ts` - shared setup fixture
+- `pages/contact.page.ts` - contact page object
+- `pages/shop.page.ts` - shop page object
+- `pages/cart.page.ts` - cart page object
+- `components/navigation.component.ts` - shared navigation actions
+- `utils/price-calculator.ts` - subtotal and total calculations
+- `playwright.config.ts` - Playwright configuration
+- `.github/workflows/playwright.yml` - GitHub Actions pipeline
+
 ## Installation
 
-Run the following command in the project root:
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-## Browser setup
-
-If Playwright browsers are not installed yet, run:
+Install Playwright browsers:
 
 ```bash
 npx playwright install
 ```
 
-## Running tests
+## Run Tests
 
-Run all tests:
+Run the full suite:
 
 ```bash
 npx playwright test
 ```
 
-Run a specific file:
+Run Test Case 2 five times:
+
+```bash
+npx playwright test tests/contact.spec.ts -g "Test case 2 - Contact Form Submission" --repeat-each=5
+```
+
+Run in headed mode:
+
+```bash
+npx playwright test --headed
+```
+
+Run a specific spec file:
 
 ```bash
 npx playwright test tests/contact.spec.ts
 ```
 
+Run only the shop suite:
+
 ```bash
 npx playwright test tests/shop.spec.ts
 ```
 
-## Reports
+## Reporting
 
-HTML reports are enabled through Playwright config and will be generated in the playwright-report folder.
+The project generates the standard Playwright HTML report using the configured reporter in `playwright.config.ts`.
+
+Open the report locally:
+
+```bash
+npx playwright show-report reports
+```
+
+The report output is written to:
+
+```text
+reports/
+```
+
+## Failure Evidence
+
+On failure, Playwright is configured to retain:
+
+- screenshots
+- videos
+- traces
+
+These are stored in the Playwright output generated during execution.
+
+## CI/CD Execution
+
+The GitHub Actions workflow is defined in:
+
+```text
+.github/workflows/playwright.yml
+```
+
+Recommended CI steps:
+
+```bash
+npm ci
+npx playwright install --with-deps
+npx playwright test
+```
+
+The workflow uploads the generated Playwright HTML report as an artifact.
 
 ## Notes
 
-- The project uses the Page Object Model (POM) approach.
-- Test data is kept in the test-data folder for easier maintenance.
-- Fixtures are used to centralize common setup and reduce duplication.
+- Test data is kept separate from test logic.
+- Locators are managed inside page objects and components.
+- Test files contain business-focused test steps.
+- The suite currently targets Chromium.
+- All AI-assisted changes should still be reviewed and validated by the QA engineer before use.
