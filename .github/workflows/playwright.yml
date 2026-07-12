@@ -13,6 +13,10 @@ on:
 
   workflow_dispatch:
 
+  schedule:
+    - cron: "0 20 * * *"
+      timezone: "Pacific/Auckland"
+
 jobs:
   playwright-tests:
     name: Run Playwright Tests
